@@ -53,7 +53,7 @@ class Model {
 
   static update(id, model, result) {
     db.query(
-      `UPDATE ${this.table_name} WHERE ${this.id_col} = ${id} SET ?`,
+      `UPDATE ${this.table_name} SET ? WHERE ${this.id_col} = ${id}`,
       model,
       (err, data) => {
         if (err) {
