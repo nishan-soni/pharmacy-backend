@@ -16,6 +16,7 @@ const {
   supplierRouter,
   contractRouter,
   prescriptionRouter,
+  billRouter,
 } = require("./routes/routes");
 
 app.use(cors());
@@ -33,6 +34,7 @@ app.use("/miscrestocks", miscRestockRouter);
 app.use("/suppliers", supplierRouter);
 app.use("/contracts", contractRouter);
 app.use("/prescriptions", prescriptionRouter);
+app.use("/bills", billRouter);
 
 const port = 4000;
 

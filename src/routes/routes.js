@@ -43,6 +43,7 @@ class PharmacistController extends controller.ControllerClass {
 const pharmacistRouter = router.Router();
 pharmacistRouter.post("/register", PharmacistController.register());
 pharmacistRouter.post("/login", PharmacistController.login());
+pharmacistRouter.get("/", PharmacistController.getAll());
 
 class EmployeeController extends controller.ControllerClass {
   static ModelClass = EmployeeModel;
@@ -73,10 +74,24 @@ const employeeRouter = router.Router();
 employeeRouter.post("/register", EmployeeController.register());
 employeeRouter.post("/login", EmployeeController.login());
 
+class PatientController {
+  static ModelClass = PatientModel;
+
+  static getPrescriptions() {
+    return (req, res) => {
+      this.ModelClass.getPrescriptions(req.params.id, (err, data) => {
+        if (err) res.status(500).send(err);
+        else res.send(data);
+      });
+    };
+  }
+}
+
 const patientRouter = router.Router();
 patientRouter.post("/", controller.create(PatientModel));
 patientRouter.get("/", controller.getAll(PatientModel));
 patientRouter.get("/:id", controller.findByID(PatientModel));
+patientRouter.get("/:id/prescriptions", PatientController.getPrescriptions());
 patientRouter.post("/:id", controller.update(PatientModel));
 patientRouter.delete("/:id", controller.deleteItem(PatientModel));
 
@@ -129,10 +144,24 @@ miscRestockRouter.get("/:id", controller.findByID(Misc_RestockModel));
 miscRestockRouter.post("/:id", controller.update(Misc_RestockModel));
 miscRestockRouter.delete("/:id", controller.deleteItem(Misc_RestockModel));
 
+class SupplierController {
+  static ModelClass = SupplierModel;
+
+  static getContracts() {
+    return (req, res) => {
+      this.ModelClass.getContracts(req.params.id, (err, data) => {
+        if (err) res.status(500).send(err);
+        else res.send(data);
+      });
+    };
+  }
+}
+
 const supplierRouter = router.Router();
 supplierRouter.post("/", controller.create(SupplierModel));
 supplierRouter.get("/", controller.getAll(SupplierModel));
 supplierRouter.get("/:id", controller.findByID(SupplierModel));
+supplierRouter.get("/:id/contracts", SupplierController.getContracts());
 supplierRouter.post("/:id", controller.update(SupplierModel));
 supplierRouter.delete("/:id", controller.deleteItem(SupplierModel));
 
@@ -173,4 +202,5 @@ module.exports = {
   supplierRouter,
   contractRouter,
   prescriptionRouter,
+  billRouter,
 };

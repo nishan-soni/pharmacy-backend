@@ -1,9 +1,11 @@
+require("dotenv").config();
+
 module.exports = {
   db: {
-    host: "us-cdbr-east-06.cleardb.net",
-    user: "b1811fc1f0fae2",
-    password: "56b2f021",
-    database: "heroku_16d6e27bb977533",
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
   },
-  jwtKey: "key123456",
+  jwtKey: process.env.JWT_KEY,
 };

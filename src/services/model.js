@@ -41,7 +41,7 @@ class Model {
 
   static delete(id, result) {
     db.query(
-      `DELETE * FROM ${this.table_name} WHERE ${this.id_col} = ${id}`,
+      `DELETE FROM ${this.table_name} WHERE ${this.id_col} = ${id}`,
       (err, data) => {
         if (err) {
           return result(err, null);

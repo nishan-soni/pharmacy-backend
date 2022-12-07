@@ -20,7 +20,7 @@ class Pharmacist extends Model {
   }
 
   static async registerUser(model, result) {
-    const { E_Address, Password } = model;
+    const { E_Address, Password, Pharmacist_ID } = model;
     const existingUser = db.query(
       `SELECT * FROM PHARMACIST WHERE E_Address = ${E_Address}`,
       (err, data) => {
@@ -40,7 +40,7 @@ class Pharmacist extends Model {
     const encryptedpass = await bcrypt.hash(Password, 10);
     model.Password = encryptedpass;
 
-    const token = jwt.sign({ E_Address, admin: true }, jwtKey, {
+    const token = jwt.sign({ E_Address, admin: true, Pharmacist_ID }, jwtKey, {
       algorithm: "HS256",
     });
 

@@ -11,6 +11,9 @@ class Prescription extends Model {
     this.DocName = prescription.DocName;
     this.FilledBy = prescription.FilledBy;
     this.PrescTo = prescription.PrescTo;
+    this.Quantity = prescription.Quantity;
+    this.Unit_Of_Meas = prescription.Unit_Of_Meas;
+    this.Med_ID = prescription.Med_ID;
   }
 }
 

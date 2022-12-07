@@ -11,15 +11,16 @@ class Med_Purchase extends Model {
     this.Date = med_purchase.Date;
     this.Total = med_purchase.Total;
     this.Insured = med_purchase.Insured;
-    this.Patient_ID = misc_purchase.Patient_ID;
-    this.Item_ID = misc_purchase.Item_ID;
+    this.Patient_ID = med_purchase.Patient_ID;
+    this.Item_ID = med_purchase.Item_ID;
+    this.Quantity = med_purchase.Quantity;
   }
 
   // Updating the med items stock when a purchase is added
   static create(model, result) {
     super.create(model, result);
     db.query(
-      `SELECT * FROM MED WHERE Item_ID = ${model.Item_ID}`,
+      `SELECT * FROM MEDICINE WHERE Item_ID = ${model.Item_ID}`,
       (err, data) => {
         data = data[0];
         const new_quantity = data.Quantity - model.Quantity;
@@ -27,7 +28,7 @@ class Med_Purchase extends Model {
         const med = new Medicine(data);
 
         db.query(
-          `UPDATE MED SET ? WHERE Item_ID = ${med.Item_ID}`,
+          `UPDATE MEDICINE SET ? WHERE Item_ID = ${med.Item_ID}`,
           { Quantity: med.Quantity },
           (err, result) => {
             console.log(err);

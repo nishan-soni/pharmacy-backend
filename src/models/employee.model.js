@@ -39,7 +39,7 @@ class Employee extends Model {
     const encryptedpass = await bcrypt.hash(Password, 10);
     model.Password = encryptedpass;
 
-    const token = jwt.sign({ E_Address, admin: true }, jwtKey, {
+    const token = jwt.sign({ E_Address, admin: false }, jwtKey, {
       algorithm: "HS256",
     });
 
